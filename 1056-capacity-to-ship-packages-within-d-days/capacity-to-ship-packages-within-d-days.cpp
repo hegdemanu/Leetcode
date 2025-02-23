@@ -1,25 +1,26 @@
 class Solution {
     bool helper (vector<int>& weights, int days, int mid){
         int sum = 0;
-        int day = 1;
+        // int day = 1;
+        days--;
        for( int w : weights){
         sum += w;
           if(sum > mid){
-            day ++;
+            days --;
             sum = w;// set to current weight
           }
        }
-       if (days >= day) return 1;
+       if (days >= 0) return 1;
        else return 0;
     }
 public:
     int shipWithinDays(vector<int>& weights, int days) {
         int min = *max_element(weights.begin(), weights.end());
        int max = accumulate(weights.begin(), weights.end(), 0ll);
-        while(max >= min){
+        while(max > min){
             int mid = min + (max - min) / 2;
             if(helper(weights, days, mid)){
-                max = mid - 1;
+                max = mid ;
             }
             else min = mid + 1;
 
