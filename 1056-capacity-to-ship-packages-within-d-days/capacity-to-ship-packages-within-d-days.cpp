@@ -21,10 +21,10 @@ public:
         cin.tie(nullptr);
         int min = *max_element(weights.begin(), weights.end());
        int max = accumulate(weights.begin(), weights.end(), 0ll);
-        while(max > min){
+        while(max >= min){
             int mid = min + (max - min) / 2;
             if(helper(weights, days, mid)){
-                max = mid ;
+                max = mid - 1;
             }
             else min = mid + 1;
 
