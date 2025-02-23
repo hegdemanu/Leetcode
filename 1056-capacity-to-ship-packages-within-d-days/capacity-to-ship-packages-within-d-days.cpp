@@ -7,6 +7,7 @@ class Solution {
         sum += w;
           if(sum > mid){
             days --;
+            if(days < 0) break;
             sum = w;// set to current weight
           }
        }
