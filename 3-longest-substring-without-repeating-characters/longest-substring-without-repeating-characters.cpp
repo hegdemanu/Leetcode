@@ -1,27 +1,45 @@
 class Solution {
 public:
     int lengthOfLongestSubstring(string s) {
-        vector < int > mpp(256, -1);
+        // Initialize a vector to track the last occurrence of each ASCII
+        // character (256 possible) Each element is initialized to -1,
+        // indicating the character hasn't been seen yet
+        vector<int> map(256, -1);
+
+        // 'r' (right) and 'l' (left) pointers define the current window of
+        // substring
+        int r = 0, l = 0;
+        // 'len' will store the maximum length of non-repeating substring found
+        int len = 0;
+        // 'n' is the length of the input string
         int n = s.size();
-        int j = 0;
-        int maxi = 0;
-        for (int i = 0; i < n; i ++){
-            // mpp.push_back(s[i], i);
-            if (mpp[s[i]] != -1)
-                j = max(mpp[s[i]] + 1, j);
-                mpp[s[i]] = i;
-                maxi = max(maxi, i - j + 1);
-             }
-      return maxi;
+
+        // Iterate through each character in the string using the right pointer
+        // 'r'
+        while (r < n) {
+            // Check if the current character has been seen before (i.e., its
+            // last occurrence is not -1)
+            if (map[s[r]] != -1) {
+                // Update the left pointer to be the maximum of its current
+                // position or one position after the last occurrence of the
+                // current character. This ensures the window contains only
+                // unique characters.
+                l = max(map[s[r]] + 1, l);
+            }
+
+            // Calculate the current window size (r - l + 1) and update 'len' if
+            // it's larger
+            len = max(len, r - l + 1);
+
+            // Record the current index 'r' as the last occurrence of the
+            // character s[r]
+            map[s[r]] = r;
+
+            // Move the right pointer to the next character
+            r++;
+        }
+
+        // Return the maximum length of non-repeating substring found
+        return len;
     }
 };
-// Let's break down how it works:
-
-// vector<int> mpp(256, -1): Creates a vector to store the last position of each character (using ASCII values as indices)
-// j: Keeps track of the start of current window of non-repeating characters
-// For each character at position i:
-
-// If we've seen this character before (mpp[s[i]] != -1), we may need to move the window start
-// We take max of (mpp[s[i]] + 1, j) to ensure we don't move the window start backwards
-// Update the last seen position of current character
-// Calculate length of current window (i - j + 1) and update maximum if needed
