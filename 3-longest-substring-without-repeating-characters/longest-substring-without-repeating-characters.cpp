@@ -1,6 +1,8 @@
 class Solution {
 public:
     int lengthOfLongestSubstring(string s) {
+        ios_base::sync_with_stdio(false);
+        cin.tie(nullptr);
         // Initialize a vector to track the last occurrence of each ASCII
         // character (256 possible) Each element is initialized to -1,
         // indicating the character hasn't been seen yet
