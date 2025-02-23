@@ -1,7 +1,6 @@
 class Solution {
     bool helper (vector<int>& weights, int days, int mid){
         int sum = 0;
-        // int day = 1;
         days--;
        for( int w : weights){
         sum += w;
