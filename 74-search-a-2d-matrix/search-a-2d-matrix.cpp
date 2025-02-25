@@ -2,6 +2,8 @@ class Solution {
 public:
     bool searchMatrix(vector<vector<int>>& matrix, int target) 
     {
+        ios_base::sync_with_stdio(false);
+        cin.tie(nullptr);
         int n = matrix.size();//rows
         if (n == 0) return false;
         int m = matrix[0].size();//columns
