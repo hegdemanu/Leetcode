@@ -3,9 +3,9 @@ public:
     bool searchMatrix(vector<vector<int>>& matrix, int target) 
     {
         int n = matrix.size();//rows
-        // if (n == 0) return false;
+        if (n == 0) return false;
         int m = matrix[0].size();//columns
-        // if (m == 0) return false;
+        if (m == 0) return false;
         int l = 0;int h = m*n - 1;//row search
         
         while(h >= l){
