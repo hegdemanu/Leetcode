@@ -16,8 +16,9 @@ class Solution {
 public:
     int splitArray(vector<int>& nums, int k) {
         int n = nums.size();
+        int r = accumulate(nums.begin(), nums.end(), 0);
+        if (k == 1) return r;
         int l = *max_element(nums.begin(), nums.end());
-        int r = accumulate(nums.begin(), nums.end(), 0ll);
         while(l < r){
             int mid = l + (r - l) / 2;
             if(canSplit(nums, k, mid, n)) {
