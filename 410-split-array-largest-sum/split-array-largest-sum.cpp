@@ -1,18 +1,18 @@
 class Solution
 {
-    bool canSplit(vector<int> &nums, int k, int mid, int n)
+    bool canSplit(vector<int> &nums, int k, int mid)
     {
         int sum = 0;
         int cnt = 1;
-        for (int i = 0; i < n; i++)
+        for (int n : nums)
         {
-            if ((nums[i] + sum) <= mid)
+            if ((n + sum) <= mid)
             {
-                sum += nums[i];
+                sum += n;
             }
             else
             {
-                sum = nums[i];
+                sum = n;
                 cnt++;
                 if (cnt > k) return false;
             }
@@ -22,14 +22,13 @@ class Solution
     public:
         int splitArray(vector<int> &nums, int k)
         {
-            int n = nums.size();
             int r = accumulate(nums.begin(), nums.end(), 0);
             if (k == 1) return r;
             int l = *max_element(nums.begin(), nums.end());
             while (l <=r)
             {
                 int mid = l + (r - l) / 2;
-                if (canSplit(nums, k, mid, n))
+                if (canSplit(nums, k, mid))
                 {
                     r = mid - 1;
                 }
