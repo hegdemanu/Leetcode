@@ -12,20 +12,13 @@ class Solution {
 public:
     ListNode* middleNode(ListNode* head) {
         if ((head == nullptr) || (head->next == nullptr)) return head;
-        int cnt = 1;
-        ListNode* temp = head;
-     while(temp){
-        temp = temp->next;
-        cnt++;
-     }   
-     temp = head;
-     int cnt2 = 1;
-     while(temp){
-        temp = temp->next;
-        cnt2 ++;
-        if(cnt2 == ((cnt+1)/2)) break;
-        
-     } 
-     return temp;
+        ListNode* slow = head;
+        ListNode* fast = head;
+        // head->next = nullptr;
+        while(fast && fast->next){
+            slow = slow->next;
+            fast = fast->next->next;
+        }
+     return slow;
     }
 };
