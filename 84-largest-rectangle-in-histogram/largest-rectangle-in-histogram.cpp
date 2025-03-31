@@ -1,43 +1,19 @@
 class Solution {
-    vector<int> prevsmaller(vector<int>& heights, int n){
-        vector<int> mark(n,0);
-        stack<int>  st;
-        for(int i = 0; i < n; i++){
-            while(!st.empty() && heights[i] < heights[st.top()]){
-                st.pop();  
-            }
-            if(!st.empty()) mark[i] = st.top();
-            else mark[i] = -1;
-            st.push(i); 
-         }
-         return mark;
-    }
-    vector<int> nextgreater(vector<int>& heights, int n){
-        vector<int> mark(n,0);
-        stack<int>  st;
-        for(int i = n - 1; i >= 0; i--){
-            while(!st.empty() && heights[i] <= heights[st.top()]){
-                st.pop();   
-            }
-            if(!st.empty()) mark[i] = st.top();
-            else mark[i] = n;
-            st.push(i);
+ public:
+int largestRectangleArea(vector<int>& heights) {
+    stack<int> st;
+    int maxArea = 0;
+    int n = heights.size();
+    
+    for (int i = 0; i <= n; i++) {
+        while (!st.empty() && (i == n || heights[st.top()] >= heights[i])) {
+            int height = heights[st.top()];
+            st.pop();
+            int width = st.empty() ? i : i - st.top() - 1;
+            maxArea = max(maxArea, height * width);
         }
-        return mark;
+        st.push(i);
     }
-public:
-    int largestRectangleArea(vector<int>& heights) {
-        int n = heights.size();
-        if(n == 1) return heights[0];
-        stack<int>  st;
-        vector<int> next = nextgreater(heights, n);
-        vector<int> prev = prevsmaller(heights, n);
-        int area = 0;
-        int maxarea = 0;
-        for(int i = 0; i < n; i++){
-            area = (next[i] - prev[i] - 1)*(heights[i]);
-            maxarea = max(area, maxarea);
-        }
-        return maxarea;
-    }
+    return maxArea;
+}
 };
