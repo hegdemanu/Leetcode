@@ -8,7 +8,7 @@ public:
             int cansee = 1;
             while(!st.empty() && st.top() < heights[i]){
                 st.pop();
-                cansee ++;
+                ++ cansee;
             }
             if(!st.empty()){
                 mark[i] = cansee;
@@ -17,7 +17,6 @@ public:
             
             st.push(heights[i]);
         }
-        mark[n - 1] = 0;
         return mark;
     }
 };
