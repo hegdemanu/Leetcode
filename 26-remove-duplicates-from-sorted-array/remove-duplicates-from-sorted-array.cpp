@@ -1,16 +1,16 @@
 class Solution {
 public:
-    int removeDuplicates(vector<int>& n) {
-        int s1 = n.size();
-        int sol = 0;
-        int i = 1;
-        int j = 0;
-        for(int i = 0; i < s1; i++){
-            while(n[i] != n[j]){
-                j++;
-                n[j] = n[i];
-            }
+    int removeDuplicates(vector<int>& arr) {
+    int slow = 0, fast = 1;
+    if (arr.size() == 0) return 0;
+    while (fast < arr.size()) {
+        if ((arr[slow] != arr[fast])) {
+            slow++;
+             arr[slow] = arr[fast];
+             
         }
-        return j+1;
-        }
+        fast++;
+}
+        return slow+1;        
+    }
 };
