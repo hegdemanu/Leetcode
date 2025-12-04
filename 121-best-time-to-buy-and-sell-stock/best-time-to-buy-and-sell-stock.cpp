@@ -4,12 +4,13 @@ public:
     {
         int maxpb = a[0];
         int maxps = 0;
-        int n = a.size();
-        if (n == 0) return 0;
-        for (int i =0; i < n; i++)
+        int r = a.size(), l = 0;
+        if (r == 0) return 0;
+        while(l < r)
         {  
-            maxpb = min(maxpb, a[i]);
-            maxps = max(maxps, a[i]-maxpb);       
+            maxpb = min(maxpb, a[l]);
+            maxps = max(maxps, a[l]-maxpb); 
+            l++;      
         }
         return maxps;
     }
