@@ -1,18 +1,25 @@
 class Solution {
 public:
-    void rotate(vector<int>& nums, int k) {
-        int n = nums.size();
-        k = k % n;  // Handle case where k > n
-        
-        if (k == 0) return;  // No rotation needed
-        
-        // 1. Reverse entire array
-        reverse(nums.begin(), nums.end());
-        
-        // 2. Reverse first k elements
-        reverse(nums.begin(), nums.begin() + k);
-        
-        // 3. Reverse remaining elements
-        reverse(nums.begin() + k, nums.end());
+   // Helper function to reverse a portion of array
+void reverse_range(vector<int>& arr, int left, int right) {
+    while (left < right) {
+        swap(arr[left], arr[right]);
+        left++;
+        right--;
     }
+}
+
+void rotate(vector<int>& arr, int k) {
+    int n = arr.size();
+    k = k % n;  // Handle k > n
+    
+    // Step 1: Reverse entire array [0, n-1]
+    reverse_range(arr, 0, n - 1);
+    
+    // Step 2: Reverse first k elements [0, k-1]
+    reverse_range(arr, 0, k - 1);
+    
+    // Step 3: Reverse remaining elements [k, n-1]
+    reverse_range(arr, k, n - 1);
+}
 };
