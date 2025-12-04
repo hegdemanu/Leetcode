@@ -1,9 +1,10 @@
 class Solution {
 public:
     int majorityElement(vector<int>& arr) {
-        if (arr.size() < 2) return arr[0];
+        int size = arr.size();
+        if (size < 2) return arr[0];
         int slow = 0, fast = 1, count = 0;
-        while(fast < arr.size()){
+        while(fast < size){
             if(arr[fast] == arr[slow]){
                 count ++;
             }else{
